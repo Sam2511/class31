@@ -1,3 +1,50 @@
+/*
+To store data --> variables
+
+DATA TYPES:
+    1. Undefined
+    2. Number
+    3. string
+    4. Boolean (T/F)
+    5. Null (empty)
+
+
+    Multiple variables --> DATA STRUCTURE
+
+    ARRAY
+    - list of items
+    - Contains same or different data types
+    - Items = elements
+    - created using []
+    - Elements are separated using a comma
+    - Length: Number of elements
+    - Index Number : 0 - (length-1)
+*/
+
+//Array containing same data type
+var arr1 = [1, 2, 3, 4, 5];
+console.log(arr1);
+console.log(arr1[2]);
+
+//Array containing different data types
+var arr2 = [100, "Samarth", true];
+console.log(arr2);
+console.log(arr2[1]);
+
+//Array containing arrays inside
+var arr3 = [[1, 2], [2, 3], [3, 4], [4, 5]];
+console.log(arr3);
+console.log(arr3[3]);
+console.log(arr3[3][0]);
+
+//Adding a new element to an array
+arr3.push("Srishti");
+console.log(arr3);
+
+//Remove an element
+arr3.pop();
+console.log(arr3);
+
 const Engine = Matter.Engine;
 const World= Matter.World;
 const Bodies = Matter.Bodies;
@@ -7,6 +54,8 @@ var engine, world;
 var box1, pig1,pig3;
 var backgroundImg,platform;
 var bird, slingshot;
+var gamestate  = "onsling";
+
 
 
 function preload() {
@@ -69,16 +118,19 @@ function draw(){
 }
 
 function mouseDragged(){
-    Matter.Body.setPosition(bird.body, {x: mouseX , y: mouseY});
+    if(gamestate !== "launched"){  //NOT - !
+        Matter.Body.setPosition(bird.body, {x: mouseX , y: mouseY});
+    }
 }
 
 
 function mouseReleased(){
     slingshot.fly();
+    gamestate  = "launched";
 }
 
 function keyPressed(){
     if(keyCode === 32){
-        slingshot.attach(bird.body);
+    //    slingshot.attach(bird.body);
     }
 }
